@@ -17,16 +17,16 @@ setup(
   ],
   install_requires=[
     'einops>=0.6.0',
-    'torch>=1.10',
-    'torchvision'
+    # 'torch>=1.10',
+    # 'torchvision'
   ],
   setup_requires=[
     'pytest-runner',
   ],
   tests_require=[
     'pytest',
-    'torch==1.12.1',
-    'torchvision==0.13.1'
+    # 'torch==1.12.1',
+    # 'torchvision==0.13.1'
   ],
   classifiers=[
     'Development Status :: 4 - Beta',
