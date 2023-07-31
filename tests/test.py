@@ -206,7 +206,7 @@ if __name__ == '__main__':
             test(args)
     elif args.precision == "float16":
         print("---- Use AMP float16")
-        with torch.cuda.amp.autocast(enabled=True, dtype=torch.float16):
+        with torch.cpu.amp.autocast(enabled=True, dtype=torch.half):
             test(args)
     else:
         test(args)
