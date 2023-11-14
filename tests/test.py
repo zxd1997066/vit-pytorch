@@ -124,6 +124,8 @@ def test(args):
     # compute
     total_sample = 0
     total_time = 0.0
+    if args.compile:
+        model = torch.compile(model, backend=args.backend, options={"freezing": True})
     with torch.no_grad():
         if args.profile:
             with torch.profiler.profile(
@@ -196,6 +198,10 @@ if __name__ == '__main__':
     parser.add_argument('--profile', action='store_true', default=False, help='collect timeline')
     parser.add_argument('--num_iter', default=200, type=int, help='test iterations')
     parser.add_argument('--num_warmup', default=20, type=int, help='test warmup')
+    parser.add_argument("--compile", action='store_true', default=False,
+                    help="enable torch.compile")
+    parser.add_argument("--backend", type=str, default='inductor',
+                    help="enable torch.compile backend")
     args = parser.parse_args()
     print(args)
 
