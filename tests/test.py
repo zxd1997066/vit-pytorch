@@ -208,11 +208,11 @@ if __name__ == '__main__':
     # start test
     if args.precision == "bfloat16":
         print("---- Use AMP bfloat16")
-        with torch.cpu.amp.autocast(enabled=True, dtype=torch.bfloat16):
+        with torch.autocast(device_type="cuda" if torch.cuda.is_available() else "cpu", enabled=True, dtype=torch.bfloat16):
             test(args)
     elif args.precision == "float16":
         print("---- Use AMP float16")
-        with torch.cpu.amp.autocast(enabled=True, dtype=torch.half):
+        with torch.autocast(device_type="cuda" if torch.cuda.is_available() else "cpu", enabled=True, dtype=torch.half):
             test(args)
     else:
         test(args)
