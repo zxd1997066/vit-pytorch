@@ -5,7 +5,7 @@ import sys
 import time
 
 import torch
-
+import torch._inductor
 
 def create_model_input(args):
     # model
@@ -128,6 +128,8 @@ def test(args):
         model = torch.compile(model, backend=args.backend, options={"freezing": True})
     with torch.no_grad():
         if args.profile:
+            torch._inductor.config.profiler_mark_wrapper_call = True
+            torch._inductor.config.cpp.enable_kernel_profile = True
             with torch.profiler.profile(
                 activities=[torch.profiler.ProfilerActivity.CPU],
                 record_shapes=True,
