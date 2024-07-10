@@ -125,7 +125,10 @@ def test(args):
     total_sample = 0
     total_time = 0.0
     if args.compile:
-        model = torch.compile(model, backend=args.backend, options={"freezing": True})
+        if args.backend == "cudagraphs":
+            model = torch.compile(model, backend=args.backend)
+        else:
+            model = torch.compile(model, backend=args.backend, options={"freezing": True})
     with torch.no_grad():
         if args.profile:
             torch._inductor.config.profiler_mark_wrapper_call = True
