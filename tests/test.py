@@ -206,10 +206,15 @@ if __name__ == '__main__':
     parser.add_argument("--compile", action='store_true', default=False,
                     help="enable torch.compile")
     parser.add_argument("--backend", type=str, default='inductor',
-                    help="enable torch.compile backend")
+                    help="enable torch.compile backend")\
+    parser.add_argument("--triton_cpu", action='store_true', default=False,
+                    help="enable triton_cpu")
     args = parser.parse_args()
     print(args)
-
+    if args.triton_cpu:
+        print("run with triton cpu backend")
+        import torch._inductor.config
+        torch._inductor.config.cpu_backend="triton"
     # start test
     if args.precision == "bfloat16":
         print("---- Use AMP bfloat16")
