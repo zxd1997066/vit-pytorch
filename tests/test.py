@@ -206,7 +206,7 @@ if __name__ == '__main__':
     parser.add_argument("--compile", action='store_true', default=False,
                     help="enable torch.compile")
     parser.add_argument("--backend", type=str, default='inductor',
-                    help="enable torch.compile backend")\
+                    help="enable torch.compile backend")
     parser.add_argument("--triton_cpu", action='store_true', default=False,
                     help="enable triton_cpu")
     args = parser.parse_args()
